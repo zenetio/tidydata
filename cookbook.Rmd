@@ -1,0 +1,43 @@
+---
+title: "Tidy data"
+author: "Carlor Roberto"
+date: "Sunday, September 21, 2014"
+output: html_document
+---
+
+This cookbook is to have an idea about how to clean the data set used in the tidy data project.
+
+Firstly, you need to load some basic libraries using the library function
+
+
+```{r}
+library(dplyr)
+```
+
+Now you can load the data set using the read.csv() function
+
+
+feature <- read.csv("features.txt", header = FALSE, sep = " ")
+
+Depending on the data set, I had to use read.table() function, like to load the training set
+
+
+training <- read.table("train/X_train.txt", header = FALSE, fill = TRUE)
+
+
+To make the things easier, each dataset was loaded into a different variable.
+
+Then the training and test data set were merged into a single variable named all using the rbind function
+
+all <- rbind(training,test)
+
+Acording to the project instructions, the mean and standard deviation were gathered and stored in 2 data frames : mean_df and dev_df
+
+After gather the indices for Activity, it was possible add a new Activity column to mean and stardard deviation data frames, now using the cbind function
+
+In step 4, to lable the data set with descriptive variable names, I used the colnames() function
+Here I had to use the as.character() function to force pass a class character to colnames function.
+
+Then the group_by function was used to create groups by Activity and by Subject to get the final result.
+The write.table function was used to save tidy data to file.
+
